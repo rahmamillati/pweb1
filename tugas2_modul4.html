@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tugas 2 Modul 4</title>
+    <style>
+        #searchInput {
+            margin: 10px;
+            padding: 8px;
+            width: 250px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <font size="7">Fakultas Ilmu Komputer</font> <br>
+    <font size="5">Universitas Kuningan</font> <br>
+    <font size="3">
+        Alamat: Jl. Pramuka No.67, Purwawinangun,
+        Kec. Kuningan, Kabupaten Kuningan, Jawa Barat 45512</font>
+    <hr size="3">
+    <input type="text" id="searchInput" onkeyup="searchTable()" placeholder="mencari nama dosen uniku">
+
+    <table id="dosen" border="1">
+        <caption><strong>DAFTAR DOSEN</strong></caption>
+        <thead>
+            <tr>
+                <th>No.</th>
+                <th>Nama</th>
+                <th>Homebase</th>
+                <th>Rumpun Keilmuan</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td align="right">1.</td>
+                <td>Tito Sugiharto, M.Eng</td>
+                <td>Teknik Informatika</td>
+                <td>Computer Engineering</td>
+            </tr>
+            <tr>
+                <td align="right">2.</td>
+                <td>Erik Kurniadi, M.Kom</td>
+                <td>Sistem Informasi</td>
+                <td>Information System</td>
+            </tr>
+            <tr>
+                <td align="right">3.</td>
+                <td>Jerry D. Rahajaan, M.Sn</td>
+                <td>Desain Komunikasi Visual</td>
+                <td>Seni, Desain, & Media</td>
+            </tr>
+            <tr>
+                <td align="right">4.</td>
+                <td>Panji Novantara, M.T.</td>
+                <td>Teknik Informatika</td>
+                <td>Computer Science</td>
+            </tr>
+            <tr>
+                <td align="right">5.</td>
+                <td>Panji Novantara, M.T.</td>
+                <td>Teknik Informatika</td>
+                <td>Teknik Sipil</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        function searchTable() {
+            let input = document.getElementById("searchInput").value.toLowerCase();
+            
+            let table = document.getElementById("dosen");
+            let rows = table.getElementsByTagName("tr");
+
+            
+            for (let i = 1; i < rows.length; i++) {  
+                let cells = rows[i].getElementsByTagName("td");
+                let found = false;
+
+                
+                for (let j = 0; j < cells.length; j++) {
+                    if (cells[j]) {
+                        let text = cells[j].textContent || cells[j].innerText;
+                        
+                        if (text.toLowerCase().indexOf(input) > -1) {
+                            found = true;
+                        }
+                    }
+                }
+
+                if (found) {
+                    rows[i].style.display = "";
+                } else {
+                    rows[i].style.display = "none";
+                }
+            }
+        }
+    </script>
+</body>
+</html>
