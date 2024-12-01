@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galeri Foto Alumni UNIKU</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .gallery-item {
+            width: 200px;
+            height: auto;
+            margin: 10px;
+            opacity: 0; /* Awalnya tidak terlihat */
+            transition: opacity 0.5s; /* Efek fade-in */
+        }
+
+        .modal {
+            display: none; /* Modal tidak terlihat secara default */
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 40px;
+            cursor: pointer;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div class="gallery">
+        <img src="dede irawan.jpg" alt="Alumni 1" class="gallery-item">
+        <img src="heri gustaman.jpg" alt="Alumni 2" class="gallery-item">
+        <img src="ria sw.jpg" alt="Alumni 3" class="gallery-item">
+        <img src="wawan heriawan.jpg" alt="Alumni 4" class="gallery-item">
+    </div>
+
+    <div class="modal" id="modal">
+        <span class="close" id="close">&times;</span>
+        <img class="modal-content" id="modal-img">
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            // Efek fade-in untuk gambar
+            $('.gallery-item').each(function(index) {
+                $(this).delay(300 * index).fadeTo(500, 1);
+            });
+
+            // Menampilkan modal saat gambar diklik
+            $('.gallery-item').on('click', function() {
+                $('#modal-img').attr('src', $(this).attr('src'));
+                $('#modal').fadeIn();
+            });
+
+            // Menutup modal dengan mengklik tombol close
+            $('#close').on('click', function() {
+                $('#modal').fadeOut();
+            });
+
+            // Menutup modal dengan mengklik area di luar gambar
+            $('#modal').on('click', function(event) {
+                if (event.target !== this && !$(event.target).hasClass('modal-content')) {
+                    return; // Jika klik di dalam gambar, jangan tutup
+                }
+                $('#modal').fadeOut();
+            });
+        });
+    </script>
+</body>
+</html>
